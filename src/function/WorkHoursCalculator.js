@@ -8,10 +8,17 @@ const { TimePicker } = DatePicker;
 let timeFormat = 'HH:mm'
 
 const WorkHoursCalculator = () => {
-  const [startTime, setStartTime] = useState('');
+  const [startTime, setStartTime] = useState(moment('09:00', timeFormat));
+  // const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [workHoursRecords, setWorkHoursRecords] = useState([]);
   const [totalHours, setTotalHours] = useState(0);
+
+  // 时间变化时的处理函数  
+  const handleTimeChange = (time, setType) => {
+    console.log('time',time,)
+    setType(time);
+  };
 
   // 计算工作时长的方法  
   const calculateWorkHours = () => {
@@ -77,19 +84,6 @@ const WorkHoursCalculator = () => {
     return formattedDate;
   }
 
-  // // 示例用法  
-  // var M = {
-  //   $L: 'en',
-  //   $u: undefined,
-  //   $d: 'Fri Apr 12 2024 09:00:00 GMT+0800 (中国标准时间)',
-  //   $y: 2024,
-  //   $M: 3,
-  //   // ... 其他属性  
-  // };
-
-  // var formattedDateTime = formatDate(M.$d);
-  // console.log(formattedDateTime); // 输出: 2024-04-12 09:00:00
-
   // 计算总工作时长  
   const calculateALLWorkHours = () => {
     const sum = workHoursRecords.reduce((acc, val) => acc + val.workHours, 0);
@@ -103,10 +97,7 @@ const WorkHoursCalculator = () => {
     setWorkHoursRecords([]);
   }
 
-  // 时间变化时的处理函数  
-  const handleTimeChange = (time, setType) => {
-    setType(time);
-  };
+
 
   const columns = [
     {
@@ -137,7 +128,7 @@ const WorkHoursCalculator = () => {
       <TimePicker
         value={startTime}
         style={{ width: '140px' }}
-        defaultValue={dayjs('09:00', timeFormat)}
+        // defaultValue={dayjs('09:00', timeFormat)}
         format={timeFormat}
         onChange={(time) => handleTimeChange(time, setStartTime)}
         placeholder="选择上班时间"
