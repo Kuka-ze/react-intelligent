@@ -8,7 +8,7 @@ const { TimePicker } = DatePicker;
 let timeFormat = 'HH:mm'
 
 const WorkHoursCalculator = () => {
-  const [startTime, setStartTime] = useState(moment('09:00', timeFormat));
+  const [startTime, setStartTime] = useState('');
   // const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [workHoursRecords, setWorkHoursRecords] = useState([]);
